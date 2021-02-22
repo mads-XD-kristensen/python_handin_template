@@ -11,6 +11,10 @@ def get_file_names(folderpath,out="output.txt"):
 
 def get_all_file_names(folderpath,out="output.txt"):
     """takes a path to a folder and write all filenames recursively (files of all sub folders to)"""
+    for root, subdirs, files in os.walk(folderpath):
+        with open(folderpath+out, 'a') as file_obj:
+            for file in files:
+                file_obj.write(file + "\n")
 
 def print_line_one(file_names):
     """takes a list of filenames and print the first line of each"""
@@ -29,3 +33,10 @@ def print_emails(file_names_2):
 
 def write_headlines(md_files, out="output.txt"):
     """takes a list of md files and writes all headlines (lines starting with #) to a file"""
+    for file in md_files:
+        with open(file) as f:
+            lines=f.readlines()
+            for line in lines:
+                if '#' in line :
+                    with open  (out, 'a') as o:
+                        o.write(line)
